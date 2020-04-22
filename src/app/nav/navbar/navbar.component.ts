@@ -16,11 +16,10 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.listener().subscribe(res => this.isSignedIn = res);
-
   }
 
   SignIn() {
-    this.router.navigate(['signin']);
+    this.router.navigate(['signin']).catch(error => console.log(error));
   }
 
   SignOut() {

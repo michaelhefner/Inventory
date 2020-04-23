@@ -1,2 +1,5 @@
-<button (click)="SignIn()" *ngIf="!isSignedIn">Sign In</button>
-<button (click)="SignOut()" *ngIf="isSignedIn">Sign Out</button>
+<nav>
+  <button (click)="SignIn()" *ngIf="!isSignedIn">Sign In</button>
+  <button (click)="SignOut()" *ngIf="isSignedIn">Sign Out</button>
+  <a *ngIf="!isSignedIn" id="button" routerLink="register">Register</a>
+</nav>

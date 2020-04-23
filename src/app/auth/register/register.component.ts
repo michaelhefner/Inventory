@@ -6,13 +6,14 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.sass']
 })
 export class RegisterComponent implements OnInit {
 
+  error = {code: '', message: ''};
   registerForm = new FormGroup({
     email: new FormControl('', Validators.email),
-    fullName: new FormControl(''),
+    // fullName: new FormControl(''),
     confirmPassword: new FormControl(''),
     password: new FormControl(''),
   });
@@ -21,22 +22,16 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['']).then(r => console.log(r));
+    }
   }
 
   register() {
-    this.authService.registerUser({
-      email: this.registerForm.value.email,
-      name: this.registerForm.value.fullName,
-      password: this.registerForm.value.password,
-      confirmPassword: this.registerForm.value.confirmPassword
-    })
-      .subscribe(result => {
-        console.log(result);
-        if (result) {
-          this.router.navigate(['active-logs']);
-        }
-      });
-    // .then(success => !success['code'] ? this.router.navigate(['']) : null).catch(error => console.log(error));
+    if (this.registerForm.value.password === this.registerForm.value.confirmPassword) {
+      this.authService.registerUser(this.registerForm.value.email, this.registerForm.value.password)
+        .catch(error => this.error.message = error);
+    }
   }
 
 }

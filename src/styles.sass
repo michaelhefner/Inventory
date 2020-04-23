@@ -1,1 +1,76 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap')
+
+*
+  margin: 0
+  padding: 0
+  font-family: 'Roboto', sans-serif
+
+body
+  width: 100vw
+  height: 100vh
+  max-width: 100%
+
+a
+  color: white
+  text-decoration: none
+
+#error-message
+  color: red
+  justify-content: center
+  align-items: center
+  text-align: center
+
+button, #button
+  padding: .4rem .6rem
+  margin-left: .5rem
+  background: rgba(70, 0, 70, .7)
+  box-shadow: 0 0 4px rgba(25, 25, 25, .5)
+  border-radius: 2px
+  border: none
+  font-size: 1rem
+  color: white
+  transition: all 500ms ease-in-out
+  width: auto
+
+button:hover, #button:hover
+  background: rgba(50, 0, 50, .1)
+  color: white
+
+label
+  margin: .2rem 0
+  max-width: 100%
+
+input::placeholder
+  color: black
+
+input, input:active, input:focus
+  border: none
+  color: black
+  background: rgba(25, 25, 25, .05)
+  padding: .3rem 1rem
+  line-height: 1.5rem
+  width: 94.5%
+
+
+form
+  display: flex
+  flex-direction: column
+  justify-self: center
+  align-self: center
+  width: 30%
+
+#submit:hover
+  color: rebeccapurple
+  background: white
+
+@media (max-width: 70rem)
+  form
+    width: 50%
+
+@media (max-width: 60rem)
+  form
+    width: 60%
+
+@media (max-width: 50rem)
+  form
+    width: 70%

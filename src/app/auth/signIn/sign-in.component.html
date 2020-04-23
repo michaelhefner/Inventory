@@ -1,0 +1,16 @@
+<section>
+  <span id="error-message">{{errorMessage}}</span>
+
+  <form (ngSubmit)="signIn()" [formGroup]="signInForm">
+    <label>
+      email
+      <input [placeholder]="'email@example.com'" [type]="'email'" formControlName="email">
+      <span *ngIf="!signInForm.get('email').valid && signInForm.get('email').touched">Please enter valid email!</span>
+    </label>
+    <label>
+      password
+      <input [placeholder]="'password'" [type]="'password'" formControlName="password">
+    </label>
+    <button [type]="'submit'" id="submit">Submit</button>
+  </form>
+</section>

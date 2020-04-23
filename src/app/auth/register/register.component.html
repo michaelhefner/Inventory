@@ -1,20 +1,21 @@
-<form (ngSubmit)="register()" [formGroup]="registerForm">
-  <label>
-    email
-    <input [placeholder]="'email@example.com'" [type]="'email'" formControlName="email">
-    <span *ngIf="!registerForm.get('email').valid && registerForm.get('email').touched">Please enter valid email</span>
-  </label>
-  <label>
-    name
-    <input [placeholder]="'John Doe'" formControlName="fullName">
-  </label>
-  <label>
-    password
-    <input [placeholder]="'password'" [type]="'password'" formControlName="password">
-  </label>
-  <label>
-    confirm password
-    <input [placeholder]="'confirm password'" [type]="'password'" formControlName="confirmPassword">
-  </label>
-  <button [type]="'submit'">Submit</button>
-</form>
+<section>
+  <span id="error-message">{{error.message}}</span>
+
+  <form (ngSubmit)="register()" [formGroup]="registerForm">
+    <label>
+      email
+      <input [placeholder]="'email@example.com'" [type]="'email'" formControlName="email">
+      <span
+        *ngIf="!registerForm.get('email').valid && registerForm.get('email').touched">Please enter valid email</span>
+    </label>
+    <label>
+      password
+      <input [placeholder]="'password'" [type]="'password'" formControlName="password">
+    </label>
+    <label>
+      confirm password
+      <input [placeholder]="'confirm password'" [type]="'password'" formControlName="confirmPassword">
+    </label>
+    <button [type]="'submit'" id="submit">Submit</button>
+  </form>
+</section>

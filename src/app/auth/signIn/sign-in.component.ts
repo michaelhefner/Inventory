@@ -5,12 +5,13 @@ import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-signin',
-  templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.css']
+  templateUrl: './sign-in.component.html',
+  styleUrls: ['./signin.component.sass']
 })
-export class SigninComponent implements OnInit {
+export class SignInComponent implements OnInit {
 
-  signinForm = new FormGroup({
+  errorMessage: string;
+  signInForm = new FormGroup({
     email: new FormControl('', Validators.email),
     password: new FormControl(''),
   });
@@ -25,13 +26,8 @@ export class SigninComponent implements OnInit {
   }
 
   signIn() {
-    this.authService.signin(this.signinForm.value.email, this.signinForm.value.password)
-      .then(result => {
-        console.log(result);
-        if (result) {
-          this.router.navigate(['']);
-        }
-      });
+    this.authService.signIn(this.signInForm.value.email, this.signInForm.value.password)
+      .catch(error => this.errorMessage = error.toString());
   }
 
 }

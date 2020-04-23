@@ -1,5 +1,12 @@
-<nav>
-  <button (click)="SignIn()" *ngIf="!isSignedIn">Sign In</button>
-  <button (click)="SignOut()" *ngIf="isSignedIn">Sign Out</button>
-  <a *ngIf="!isSignedIn" id="button" routerLink="register">Register</a>
-</nav>
+<section>
+  <ul>
+    <li><a>create item</a></li>
+    <li><a>create item</a></li>
+    <li><a>create item</a></li>
+  </ul>
+  <nav>
+    <button (click)="SignIn()" *ngIf="!isSignedIn">Sign In</button>
+    <button (click)="SignOut()" *ngIf="isSignedIn">Sign Out</button>
+    <a *ngIf="!isSignedIn" id="button" routerLink="register">Register</a>
+  </nav>
+</section>

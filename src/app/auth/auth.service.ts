@@ -49,7 +49,7 @@ export class AuthService {
 
   signOut() {
     firebase.auth().signOut()
-      .then(() => this.router.navigate(['signin']))
+      .then(() => this.router.navigate(['sign_in']))
       .catch(error => console.log(error));
   }
 

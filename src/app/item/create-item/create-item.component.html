@@ -3,6 +3,7 @@
 
   <form (ngSubmit)="add()" [formGroup]="createItem">
     <h1>{{item}}</h1>
+    <span id="form-span">
     <label>
       name
       <input (ngModelChange)="changeHandler($event)" [placeholder]="'name'" [type]="'text'" formControlName="name">
@@ -15,6 +16,19 @@
       minimum stock
       <input [placeholder]="'0'" [type]="'number'" formControlName="minStock" min="0">
     </label>
+    <label>
+      current quantity
+      <input [placeholder]="'0'" [type]="'number'" formControlName="currentQuantity">
+    </label>
+    <label>
+      location
+      <input [placeholder]="'stock location'" [type]="'text'" formControlName="location">
+    </label>
+    <label id="description">
+      description
+      <input [placeholder]="'description'" [type]="'text'" formControlName="description">
+    </label>
+      </span>
     <span>
       <button [type]="'submit'">Done</button>
     </span>

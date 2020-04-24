@@ -14,7 +14,10 @@ export class CreateItemComponent implements OnInit {
   createItem = new FormGroup({
     name: new FormControl(''),
     minStock: new FormControl(''),
-    partNumber: new FormControl('')
+    partNumber: new FormControl(''),
+    currentQuantity: new FormControl(''),
+    description: new FormControl(''),
+    location: new FormControl('')
   });
   names = [];
   item = 'Item';
@@ -32,7 +35,10 @@ export class CreateItemComponent implements OnInit {
         {
           name: this.createItem.value.name,
           minStock: this.createItem.value.minStock,
-          partNumber: this.createItem.value.partNumber
+          partNumber: this.createItem.value.partNumber,
+          currentQuantity: this.createItem.value.currentQuantity,
+          description: this.createItem.value.description,
+          location: this.createItem.value.location
         });
     }
     this.router.navigate(['']).then(res => console.log(res));

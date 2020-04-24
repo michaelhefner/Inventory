@@ -16,13 +16,7 @@ export class ShowItemsComponent implements OnInit {
   ngOnInit(): void {
     this.dbControllerService.select('parts').then(res => {
       res.forEach(item => {
-        this.items.push(
-          {
-            id: item.id,
-            name: item.data().name,
-            minStock: item.data().minStock,
-            partNumber: item.data().partNumber
-          });
+        this.items.push(item);
         console.log(item.data());
       });
     });

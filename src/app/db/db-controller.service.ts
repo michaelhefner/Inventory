@@ -28,7 +28,21 @@ export class DbControllerService {
       .collection(firebase.auth().currentUser.email)
       .doc('inventory')
       .collection(collection)
-      .get().then(doc => doc);
+      .get().then(doc => {
+        const returnObj = [];
+        doc.forEach(item => {
+          returnObj.push({
+            id: item.id,
+            name: item.data().name,
+            minStock: item.data().minStock,
+            currentQuantity: item.data().currentQuantity,
+            description: item.data().description,
+            location: item.data().location,
+            partNumber: item.data().partNumber
+          });
+        });
+        return returnObj;
+      });
   }
 
   delete(collection: string, id: string) {

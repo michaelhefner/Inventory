@@ -2,7 +2,6 @@ import {EventEmitter, Injectable} from '@angular/core';
 
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
-import 'firebase/firestore';
 import {Router} from '@angular/router';
 
 @Injectable({

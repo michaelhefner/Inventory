@@ -11,6 +11,8 @@ import {HomeComponent} from './home/home.component';
 import {NavbarComponent} from './nav/navbar/navbar.component';
 import {RegisterComponent} from './auth/register/register.component';
 import {AuthGuard} from './auth/auth-guard.service';
+import {CreateItemComponent} from './item/create-item/create-item.component';
+import {ShowItemsComponent} from './item/show-items/show-items.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import {AuthGuard} from './auth/auth-guard.service';
     SignInComponent,
     RegisterComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    CreateItemComponent,
+    ShowItemsComponent
   ],
   imports: [
     BrowserModule,

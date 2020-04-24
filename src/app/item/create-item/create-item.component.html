@@ -1,0 +1,24 @@
+<section>
+  <span id="error-message">{{error.message}}</span>
+
+  <form (ngSubmit)="add()" [formGroup]="createItem">
+    <h1>{{item}}</h1>
+    <label>
+      name
+      <input (ngModelChange)="changeHandler($event)" [placeholder]="'name'" [type]="'text'" formControlName="name">
+    </label>
+    <label>
+      part number
+      <input [placeholder]="'part number'" [type]="'text'" formControlName="partNumber">
+    </label>
+    <label>
+      minimum stock
+      <input [placeholder]="'0'" [type]="'number'" formControlName="minStock" min="0">
+    </label>
+    <span>
+      <button [type]="'submit'">Done</button>
+    </span>
+  </form>
+</section>
+
+<!--<div *ngFor="let name of names"><h1>{{name.val}}</h1> </div>-->

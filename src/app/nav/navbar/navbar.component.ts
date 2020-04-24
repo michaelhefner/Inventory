@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit {
   }
 
   SignIn() {
-    this.router.navigate(['signin']).catch(error => console.log(error));
+    this.router.navigate(['sign_in']).catch(error => console.log(error));
   }
 
   SignOut() {

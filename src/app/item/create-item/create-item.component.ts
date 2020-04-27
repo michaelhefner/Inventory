@@ -14,7 +14,7 @@ export class CreateItemComponent implements OnInit {
   createItem = new FormGroup({
     name: new FormControl(''),
     minStock: new FormControl(''),
-    partNumber: new FormControl(''),
+    manPartNumber: new FormControl(''),
     currentQuantity: new FormControl(''),
     description: new FormControl(''),
     location: new FormControl('')
@@ -30,16 +30,22 @@ export class CreateItemComponent implements OnInit {
   }
 
   add() {
-    if (this.createItem.value.name && this.createItem.value.minStock && this.createItem.value.partNumber) {
-      this.dbControllerService.insert(
-        {
-          name: this.createItem.value.name,
-          minStock: this.createItem.value.minStock,
-          partNumber: this.createItem.value.partNumber,
-          currentQuantity: this.createItem.value.currentQuantity,
-          description: this.createItem.value.description,
-          location: this.createItem.value.location
-        });
+    const data = {
+      name: this.createItem.value.name,
+      minStock: this.createItem.value.minStock,
+      manPartNumber: this.createItem.value.manPartNumber,
+      currentQuantity: this.createItem.value.currentQuantity,
+      description: this.createItem.value.description,
+      location: this.createItem.value.location
+    };
+    if (this.createItem.value.name
+      && this.createItem.value.minStock
+      && this.createItem.value.manPartNumber
+      && this.createItem.value.currentQuantity
+      && this.createItem.value.description
+      && this.createItem.value.location
+    ) {
+      this.dbControllerService.insert(data);
     }
     this.router.navigate(['']).then(res => console.log(res));
   }

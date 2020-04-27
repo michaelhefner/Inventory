@@ -11,7 +11,6 @@ import {ConfigFile} from '../configFile';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  title = 'Inventory';
 
   constructor(private authService: AuthService) {
     firebase.initializeApp(ConfigFile.firebaseConfig);

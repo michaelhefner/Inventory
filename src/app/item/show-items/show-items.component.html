@@ -1,6 +1,16 @@
-<section *ngFor="let item of items">
-  <h1>{{item.id}}</h1>
-  <h1>{{item.name}}</h1>
-  <h1>{{item.description}}</h1>
-  <h1>{{item.currentQuantity}}</h1>
+<section *ngFor="let item of items" [id]="item.id">
+  <header>
+    <h1>{{item.name}}</h1>
+    <h2>Part Number: {{item.manPartNumber}}</h2>
+  </header>
+  <main>
+    <article>
+      <h3>Location: {{item.location}}</h3>
+      <h4>Current Quantity: {{item.currentQuantity}}</h4>
+    </article>
+    <p>Description: {{item.description}}</p>
+  </main>
+  <footer>
+    <h5>Minimum: {{item.minStock}}</h5>
+  </footer>
 </section>

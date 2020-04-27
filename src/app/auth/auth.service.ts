@@ -3,6 +3,7 @@ import {EventEmitter, Injectable} from '@angular/core';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import {Router} from '@angular/router';
+import {DbControllerService} from '../db/db-controller.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,9 @@ export class AuthService {
   private signedIn = false;
   private user = null;
 
-  constructor(private router: Router) {
+  // private admin = firebase.auth();
+
+  constructor(private router: Router, private dbControllerService: DbControllerService) {
   }
 
   authStateListener() {
@@ -30,6 +33,7 @@ export class AuthService {
     return firebase.auth().signInWithEmailAndPassword(email, password)
       .then(result => {
         if (result) {
+          this.user = result.user;
           this.router.navigate(['']).catch(error => console.log(error));
         }
       });
@@ -52,13 +56,33 @@ export class AuthService {
       .catch(error => console.log(error));
   }
 
-  registerUser(email: string, password: string) {
-    return firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(result => {
-        this.signedIn = !!result;
-        this.user = result;
-        this.router.navigate([''])
-          .catch(error => console.log(error));
-      });
+  registerUser(email: string, password: string, uniqueGroupID: string) {
+    return new Promise((resolve, reject) => {
+      firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(result => {
+          this.signedIn = !!result;
+          this.user = result.user;
+          this.dbControllerService.groupIDPresent(result.user, uniqueGroupID)
+            .then(res => {
+              console.log(res);
+              if (!res) {
+                this.dbControllerService.insertUserIntoDB(this.user, uniqueGroupID).then(nextRes => {
+                  if (!nextRes) {
+                    firebase.auth().currentUser.delete().catch(err => console.log(err));
+                    reject('Group Id already exists');
+                  } else {
+                    this.router.navigate([''])
+                      .catch(error => console.log(error));
+                    resolve('success');
+                  }
+                }).catch(err => reject(err));
+              } else {
+                firebase.auth().currentUser.delete().catch(err => console.log(err));
+                reject('Group Id already exists');
+              }
+            })
+            .catch(err => console.log(err));
+        });
+    });
   }
 }

@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
   error = {code: '', message: ''};
   registerForm = new FormGroup({
     email: new FormControl('', Validators.email),
-    // fullName: new FormControl(''),
+    uniqueGroupID: new FormControl(''),
     confirmPassword: new FormControl(''),
     password: new FormControl(''),
   });
@@ -28,8 +28,8 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    if (this.registerForm.value.password === this.registerForm.value.confirmPassword) {
-      this.authService.registerUser(this.registerForm.value.email, this.registerForm.value.password)
+    if (this.registerForm.value.password === this.registerForm.value.confirmPassword && this.registerForm.value.uniqueGroupID) {
+      this.authService.registerUser(this.registerForm.value.email, this.registerForm.value.password, this.registerForm.value.uniqueGroupID)
         .catch(error => this.error.message = error);
     }
   }

@@ -3,10 +3,14 @@
 
   <form (ngSubmit)="register()" [formGroup]="registerForm">
     <label>
-      email
-      <input [placeholder]="'email@example.com'" [type]="'email'" formControlName="email">
+      company email
+      <input [placeholder]="'email@yourcompany.com'" [type]="'email'" formControlName="email">
       <span
         *ngIf="!registerForm.get('email').valid && registerForm.get('email').touched">Please enter valid email</span>
+    </label>
+    <label>
+      unique group id
+      <input [placeholder]="'Company Inc Inventory'" [type]="'text'" formControlName="uniqueGroupID">
     </label>
     <label>
       password

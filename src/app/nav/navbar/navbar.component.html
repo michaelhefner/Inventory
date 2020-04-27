@@ -1,13 +1,16 @@
-<section>
-  <ul>
-    <li><a></a></li>
-    <li><a routerLink="create_item">create item</a></li>
-    <li><a routerLink="show_items">show items</a></li>
-  </ul>
-</section>
+<header>
+  <h1><a routerLink="/"> {{title}} </a></h1>
+  <nav>
+    <button (click)="SignIn()" *ngIf="!isSignedIn">Sign In</button>
+    <button (click)="SignOut()" *ngIf="isSignedIn">Sign Out</button>
+    <button (click)="register()" *ngIf="!isSignedIn">Register</button>
+  </nav>
+  <section>
+    <ul>
+      <li><a routerLink="/"> Home </a></li>
+      <li><a routerLink="create_item"> Create Item </a></li>
+      <li><a routerLink="show_items"> Show Item </a></li>
+    </ul>
+  </section>
 
-<nav>
-  <button (click)="SignIn()" *ngIf="!isSignedIn">Sign In</button>
-  <button (click)="SignOut()" *ngIf="isSignedIn">Sign Out</button>
-  <a *ngIf="!isSignedIn" id="button" routerLink="register">Register</a>
-</nav>
+</header>

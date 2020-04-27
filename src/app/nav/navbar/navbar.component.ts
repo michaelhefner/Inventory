@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 export class NavbarComponent implements OnInit {
 
   isSignedIn: boolean;
+  title = 'Inventory';
 
   constructor(private authService: AuthService, private router: Router) {
   }
@@ -27,4 +28,7 @@ export class NavbarComponent implements OnInit {
     this.authService.signOut();
   }
 
+  register() {
+    this.router.navigate(['register']).catch(error => console.log(error));
+  }
 }

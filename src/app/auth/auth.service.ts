@@ -34,6 +34,7 @@ export class AuthService {
       .then(result => {
         if (result) {
           this.user = result.user;
+          console.log(result.user.toJSON());
           this.router.navigate(['']).catch(error => console.log(error));
         }
       });
@@ -62,11 +63,15 @@ export class AuthService {
         .then(result => {
           this.signedIn = !!result;
           this.user = result.user;
-          this.dbControllerService.groupIDPresent(result.user, uniqueGroupID)
-            .then(res => {
-              console.log(res);
-              if (!res) {
-                this.dbControllerService.insertUserIntoDB(this.user, uniqueGroupID).then(nextRes => {
+          return result.user;
+        })
+        .then(user => {
+          this.dbControllerService.groupIDPresent(user, uniqueGroupID)
+            .then(idExists => {
+              console.log('id exists' + idExists);
+              if (!idExists) {
+                this.dbControllerService.insertUserIntoDB(this.user, uniqueGroupID, !idExists).then(nextRes => {
+                  console.log(nextRes);
                   if (!nextRes) {
                     firebase.auth().currentUser.delete().catch(err => console.log(err));
                     reject('Group Id already exists');

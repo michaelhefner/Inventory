@@ -16,7 +16,7 @@ export class DbControllerService {
   setLocation(user) {
     this.location.collection = 'inventory';
     this.location.document = user.email;
-    console.log(this.location);
+    // console.log(this.location);
   }
 
 
@@ -33,6 +33,8 @@ export class DbControllerService {
 
   select(collection: string) {
     this.setLocation(firebase.auth().currentUser);
+    this.getGroupID();
+
     return firebase.firestore()
       .collection(this.location.collection)
       .doc(this.location.document)
@@ -47,10 +49,10 @@ export class DbControllerService {
             currentQuantity: item.data().currentQuantity,
             description: item.data().description,
             location: item.data().location,
-            partNumber: item.data().partNumber
+            manPartNumber: item.data().manPartNumber
           });
         });
-        console.log(returnObj);
+        // console.log(returnObj);
         return returnObj;
       });
   }
@@ -67,6 +69,9 @@ export class DbControllerService {
       .catch(err => console.log(err));
   }
 
+  getGroupID() {
+    // firebase.firestore().collection(this.location.collection).
+  }
 
   /*
   Group ID can only be generated once and needs to be unique
@@ -76,10 +81,18 @@ export class DbControllerService {
     this.setLocation(user);
     return firebase.firestore()
       .collection(this.location.collection)
-      .doc(groupId)
-      .collection('authorizedUsers')
-      .get().then(doc => {
-        return !doc.empty;
+      .doc('userData')
+      .collection('groups')
+      .get()
+      .then(doc => {
+        let exists = false;
+        doc.docs.forEach(name => {
+          console.log('group id exists ' + (name.data().name.toString() === groupId));
+          if (name.data().name.toString() === groupId) {
+            exists = true;
+          }
+        });
+        return exists;
       }).catch(err => console.log(err));
   }
 
@@ -87,16 +100,31 @@ export class DbControllerService {
   Inserting user information into the group ID location,
   for future authorized user reference.
    */
-  insertUserIntoDB(user, groupId) {
+  insertUserIntoDB(user, groupId: string, isGroupCreator: boolean) {
     this.setLocation(user);
     return firebase.firestore()
       .collection(this.location.collection)
-      .doc(groupId)
-      .collection('authorizedUsers')
-      .add({user: user.email})
-      .then(doc => {
-        return doc;
-      }).catch(err => {
+      .doc('userData')
+      .collection('users')
+      .add({
+        user: user.email,
+        groupID: groupId,
+        isCreator: isGroupCreator
+      })
+      .then(res => {
+        console.log(res);
+        firebase.firestore()
+          .collection(this.location.collection)
+          .doc('userData')
+          .collection('groups')
+          .add({
+            name: groupId,
+            authorizedUsers: user.email
+          })
+          .catch(error => console.log(error));
+        return true;
+      })
+      .catch(err => {
         firebase.firestore().collection(this.location.collection).add({name: document}).catch((error) => console.log(error));
         return false;
       });

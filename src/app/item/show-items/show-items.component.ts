@@ -17,6 +17,7 @@ export class ShowItemsComponent implements OnInit {
     this.dbControllerService.select('parts').then(res => {
       res.forEach(item => {
         this.items.push(item);
+        console.log(item);
       });
     });
   }

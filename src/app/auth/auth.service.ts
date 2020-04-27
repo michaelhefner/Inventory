@@ -68,7 +68,7 @@ export class AuthService {
         .then(user => {
           this.dbControllerService.groupIDPresent(user, uniqueGroupID)
             .then(idExists => {
-              console.log('id exists' + idExists);
+              console.log(idExists ? 'Group id exists already' : '');
               if (!idExists) {
                 this.dbControllerService.insertUserIntoDB(this.user, uniqueGroupID, !idExists).then(nextRes => {
                   console.log(nextRes);

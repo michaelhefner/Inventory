@@ -17,6 +17,7 @@ export class RegisterComponent implements OnInit {
     confirmPassword: new FormControl(''),
     password: new FormControl(''),
   });
+  groupStyle: string;
 
   constructor(private authService: AuthService, private router: Router) {
   }
@@ -30,7 +31,10 @@ export class RegisterComponent implements OnInit {
   register() {
     if (this.registerForm.value.password === this.registerForm.value.confirmPassword && this.registerForm.value.uniqueGroupID) {
       this.authService.registerUser(this.registerForm.value.email, this.registerForm.value.password, this.registerForm.value.uniqueGroupID)
-        .catch(error => this.error.message = error);
+        .catch(error => {
+          this.error.message = error;
+          this.groupStyle = 'red';
+        });
     }
   }
 

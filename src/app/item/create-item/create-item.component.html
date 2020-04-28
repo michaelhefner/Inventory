@@ -24,20 +24,22 @@
       location
       <input [placeholder]="'stock location'" [type]="'text'" formControlName="location">
     </label>
+      <label>
+      cost
+      <input [placeholder]="'$0.00'" [type]="'number'" formControlName="cost" min="0">
+    </label>
     <label id="description">
       description
-      <input [placeholder]="'description'" [type]="'text'" formControlName="description">
+      <textarea [placeholder]="'description'" formControlName="description"></textarea>
     </label>
     <label id="fileUpload">
-      file upload
-      <!--      <input [placeholder]="'file'" [type]="'file'" formControlName="imageFile">-->
+      drawing file upload
+    <input (change)="handleFileInput($event)"
+           accept="application/pdf"
+           formControlName="imageFile"
+           type="file">
     </label>
 
-    <input (change)="handleFileInput($event)"
-           formControlName="imageFile"
-           id="file"
-           type="file"
-    >
       </span>
     <span>
       <button [type]="'submit'">Done</button>

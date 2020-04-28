@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import 'firebase/storage';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable({
@@ -14,44 +15,56 @@ export class DbControllerService {
   constructor(private httpClient: HttpClient) {
   }
 
-  // uploadImage(formData: FormData) {
-  //   console.log(formData);
-  //   this.httpService.post('http://127.0.0.1:3000/upload-image', formData).subscribe(obs => {
-  //     console.log(obs);
-  //   });
-  // }
-  postFile(fileToUpload: File) {
-    const endpoint = 'http://127.0.0.1:3000/upload-image';
-    const formData: FormData = new FormData();
-    formData.append('imageFile', fileToUpload, fileToUpload.name);
-    this.httpClient
-      .post(endpoint, formData).subscribe(obs => {
-      console.log(obs);
-    });
+  getPDFUrl(location: string) {
+    console.log(location);
+    return firebase.app().storage('gs://michaelhefner-inventory.appspot.com/').ref()
+      .child(location)
+      .getDownloadURL().then((url) => {
+        return url;
+      });
   }
 
   setLocation(user) {
     this.location.collection = 'inventory';
     this.location.document = user.email;
-    // console.log(this.location);
   }
 
-
-  insert(data: object) {
+  insert(data, fileToUpload?: File) {
     this.setLocation(firebase.auth().currentUser);
-    firebase.firestore()
-      .collection(this.location.collection)
-      .doc(this.location.document)
-      .collection('parts')
-      .add(data)
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+    const insertPromise = (dataToInsert) => {
+      firebase.firestore()
+        .collection(this.location.collection)
+        .doc(this.location.document)
+        .collection('parts')
+        .add(dataToInsert)
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+    };
+    if (fileToUpload) {
+      this.uploadFile(fileToUpload, data.name).then((path) => {
+        data.imageFile = path;
+        return data;
+      })
+        .then(res => insertPromise(res)).catch(error => console.log(error));
+    } else {
+      insertPromise(data);
+    }
+  }
+
+  uploadFile(fileToUpload: File, location: string) {
+    return this.getGroupID()
+      .then(res => {
+        return firebase.app().storage('gs://michaelhefner-inventory.appspot.com/')
+          .ref().child(`${res}/${location}/${fileToUpload.name}`)
+          .put(fileToUpload)
+          .then((snapshot) => {
+            return snapshot.metadata.fullPath;
+          });
+      });
   }
 
   select(collection: string) {
     this.setLocation(firebase.auth().currentUser);
-    this.getGroupID();
-
     return firebase.firestore()
       .collection(this.location.collection)
       .doc(this.location.document)
@@ -66,10 +79,10 @@ export class DbControllerService {
             currentQuantity: item.data().currentQuantity,
             description: item.data().description,
             location: item.data().location,
+            imageFile: this.getPDFUrl(item.data().imageFile),
             manPartNumber: item.data().manPartNumber
           });
         });
-        // console.log(returnObj);
         return returnObj;
       });
   }
@@ -87,7 +100,23 @@ export class DbControllerService {
   }
 
   getGroupID() {
-    // firebase.firestore().collection(this.location.collection).
+    const user = firebase.auth().currentUser;
+    this.setLocation(user);
+
+    return firebase.firestore()
+      .collection(this.location.collection)
+      .doc('userData')
+      .collection('users')
+      .get()
+      .then(doc => {
+        let groupID = '';
+        doc.docs.forEach(userEntry => {
+          if (userEntry.data().user.toString() === user.email) {
+            groupID = userEntry.data().groupID;
+          }
+        });
+        return groupID;
+      }).catch(err => console.log(err));
   }
 
   /*

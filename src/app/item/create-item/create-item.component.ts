@@ -17,6 +17,7 @@ export class CreateItemComponent implements OnInit {
     manPartNumber: new FormControl(''),
     currentQuantity: new FormControl(''),
     description: new FormControl(''),
+    cost: new FormControl(''),
     imageFile: new FormControl(''),
     location: new FormControl('')
   });
@@ -36,26 +37,18 @@ export class CreateItemComponent implements OnInit {
     if (e.target.files.length > 0) {
       this.fileToUpload = e.target.files.item(0);
     }
-  }
-
-  uploadFileToActivity() {
+    console.log(this.fileToUpload.name.indexOf('.pdf') === this.fileToUpload.name.length - 4);
   }
 
   add() {
-    // this.fileToUpload = this.createItem.get('imageFile').value;
-
-    const formData = new FormData();
-    formData.append('fileKey', this.fileToUpload, 'test');
-    // this.dbControllerService.uploadImage(formData);
-    this.dbControllerService.postFile(this.fileToUpload);
-
     const data = {
       name: this.createItem.value.name,
       minStock: this.createItem.value.minStock,
       manPartNumber: this.createItem.value.manPartNumber,
       currentQuantity: this.createItem.value.currentQuantity,
       description: this.createItem.value.description,
-      imageFile: this.createItem.value.imageFile,
+      cost: this.createItem.value.cost,
+      imageFile: this.fileToUpload.name || '',
       location: this.createItem.value.location
     };
     if (this.createItem.value.name
@@ -63,9 +56,11 @@ export class CreateItemComponent implements OnInit {
       && this.createItem.value.manPartNumber
       && this.createItem.value.currentQuantity
       && this.createItem.value.description
+      && this.createItem.value.cost
       && this.createItem.value.location
+      && this.fileToUpload.name
     ) {
-      this.dbControllerService.insert(data);
+      this.dbControllerService.insert(data, this.fileToUpload);
     }
     this.router.navigate(['']).then(res => console.log(res));
   }
@@ -73,8 +68,4 @@ export class CreateItemComponent implements OnInit {
   changeHandler(e) {
     this.item = (e !== '' ? e : 'Item');
   }
-
-  // fileHandler(files: FileList) {
-  //   this.file = files.item[0];
-  // }
 }

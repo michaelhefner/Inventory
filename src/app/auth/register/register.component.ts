@@ -29,7 +29,8 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    if (this.registerForm.value.password === this.registerForm.value.confirmPassword && this.registerForm.value.uniqueGroupID) {
+    if (this.registerForm.value.password === this.registerForm.value.confirmPassword
+      && this.registerForm.value.uniqueGroupID) {
       this.authService.registerUser(this.registerForm.value.email, this.registerForm.value.password, this.registerForm.value.uniqueGroupID)
         .catch(error => {
           this.error.message = error;

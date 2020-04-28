@@ -13,6 +13,7 @@ import {RegisterComponent} from './auth/register/register.component';
 import {AuthGuard} from './auth/auth-guard.service';
 import {CreateItemComponent} from './item/create-item/create-item.component';
 import {ShowItemsComponent} from './item/show-items/show-items.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import {ShowItemsComponent} from './item/show-items/show-items.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    HttpClientModule,
     FormsModule
   ],
   providers: [

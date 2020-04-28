@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,23 @@ import 'firebase/firestore';
 export class DbControllerService {
   private location = {collection: null, document: null};
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
+  }
+
+  // uploadImage(formData: FormData) {
+  //   console.log(formData);
+  //   this.httpService.post('http://127.0.0.1:3000/upload-image', formData).subscribe(obs => {
+  //     console.log(obs);
+  //   });
+  // }
+  postFile(fileToUpload: File) {
+    const endpoint = 'http://127.0.0.1:3000/upload-image';
+    const formData: FormData = new FormData();
+    formData.append('imageFile', fileToUpload, fileToUpload.name);
+    this.httpClient
+      .post(endpoint, formData).subscribe(obs => {
+      console.log(obs);
+    });
   }
 
   setLocation(user) {

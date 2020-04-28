@@ -1,7 +1,7 @@
 <section>
   <span id="error-message">{{error.message}}</span>
 
-  <form (ngSubmit)="add()" [formGroup]="createItem">
+  <form (ngSubmit)="add()" [formGroup]="createItem" enctype="multipart/form-data">
     <h1>{{item}}</h1>
     <span id="form-span">
     <label>
@@ -28,6 +28,16 @@
       description
       <input [placeholder]="'description'" [type]="'text'" formControlName="description">
     </label>
+    <label id="fileUpload">
+      file upload
+      <!--      <input [placeholder]="'file'" [type]="'file'" formControlName="imageFile">-->
+    </label>
+
+    <input (change)="handleFileInput($event)"
+           formControlName="imageFile"
+           id="file"
+           type="file"
+    >
       </span>
     <span>
       <button [type]="'submit'">Done</button>

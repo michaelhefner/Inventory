@@ -1,17 +1,22 @@
-<section *ngFor="let item of items" [id]="item.id">
-  <header>
-    <h1>{{item.name}}</h1>
-    <h2>Part Number: {{item.manPartNumber}}</h2>
-  </header>
-  <main>
-    <article>
-      <h3>Location: {{item.location}}</h3>
-      <h4>Current Quantity: {{item.currentQuantity}}</h4>
-    </article>
-    <p>Description: {{item.description}}</p>
-    <a [href]="item.imageFile.i">Show Drawing File</a>
-  </main>
-  <footer>
-    <h5>Minimum: {{item.minStock}}</h5>
-  </footer>
+<section>
+  <table>
+    <tr>
+      <th>Inventory#</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Location</th>
+      <th>Current Quantity</th>
+      <th>Manufacturer Part#</th>
+      <th>Link to Drawing</th>
+    </tr>
+    <tr *ngFor="let item of items" [id]="item.id">
+      <td>{{item.id}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.description}}</td>
+      <td>{{item.location}}</td>
+      <td>{{item.currentQuantity}}</td>
+      <td> {{item.manPartNumber}}</td>
+      <td><a [href]="item.imageFile.i">Show Drawing File</a></td>
+    </tr>
+  </table>
 </section>

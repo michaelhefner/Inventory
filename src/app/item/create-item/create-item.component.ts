@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DbControllerService} from '../../db/db-controller.service';
 import {Router} from '@angular/router';
 
@@ -11,16 +11,7 @@ import {Router} from '@angular/router';
 export class CreateItemComponent implements OnInit {
 
   error = {code: '', message: ''};
-  createItem = new FormGroup({
-    name: new FormControl(''),
-    minStock: new FormControl(''),
-    manPartNumber: new FormControl(''),
-    currentQuantity: new FormControl(''),
-    description: new FormControl(''),
-    cost: new FormControl(''),
-    imageFile: new FormControl(''),
-    location: new FormControl('')
-  });
+  createItem;
   names = [];
   item = 'Item';
   fileToUpload: File;
@@ -30,6 +21,16 @@ export class CreateItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.createItem = new FormGroup({
+      name: new FormControl('', Validators.required),
+      minStock: new FormControl('', [Validators.required, Validators.min(0)]),
+      manPartNumber: new FormControl('', Validators.required),
+      currentQuantity: new FormControl('', [Validators.required, Validators.min(0)]),
+      description: new FormControl('', [Validators.required, Validators.maxLength(300)]),
+      cost: new FormControl('', [Validators.required, Validators.min(0)]),
+      imageFile: new FormControl('', Validators.required),
+      location: new FormControl('', Validators.required)
+    });
   }
 
   handleFileInput(e) {
@@ -40,7 +41,10 @@ export class CreateItemComponent implements OnInit {
     console.log(this.fileToUpload.name.indexOf('.pdf') === this.fileToUpload.name.length - 4);
   }
 
-  add() {
+  add(form) {
+    // console.log('Form is ' + form.isValid() ? 'valid' : 'invalid');
+    console.log(form.status);
+    this.validateNotEmpty(form);
     const data = {
       name: this.createItem.value.name,
       minStock: this.createItem.value.minStock,
@@ -51,18 +55,25 @@ export class CreateItemComponent implements OnInit {
       imageFile: this.fileToUpload.name || '',
       location: this.createItem.value.location
     };
-    if (this.createItem.value.name
-      && this.createItem.value.minStock
-      && this.createItem.value.manPartNumber
-      && this.createItem.value.currentQuantity
-      && this.createItem.value.description
-      && this.createItem.value.cost
-      && this.createItem.value.location
-      && this.fileToUpload.name
-    ) {
+    // if (this.createItem.value.name
+    //   && this.createItem.value.minStock
+    //   && this.createItem.value.manPartNumber
+    //   && this.createItem.value.currentQuantity
+    //   && this.createItem.value.description
+    //   && this.createItem.value.cost
+    //   && this.createItem.value.location
+    //   && this.fileToUpload.name
+    // )
+    if (form.status === 'VALID') {
       this.dbControllerService.insert(data, this.fileToUpload);
+      this.router.navigate(['']).then(res => console.log(res));
     }
-    this.router.navigate(['']).then(res => console.log(res));
+
+  }
+
+  validateNotEmpty(input: FormControl) {
+    console.log(input.valid ? 'Not empty' : 'Empty');
+    return false;
   }
 
   changeHandler(e) {

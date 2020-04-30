@@ -1,50 +1,59 @@
 <section>
   <span id="error-message">{{error.message}}</span>
 
-  <form (ngSubmit)="add()" [formGroup]="createItem" enctype="multipart/form-data">
+  <form (ngSubmit)="add(createItem)" [formGroup]="createItem" enctype="multipart/form-data">
     <h1>{{item}}</h1>
     <span id="form-span">
     <label>
       name
-      <input (ngModelChange)="changeHandler($event)" [placeholder]="'name'" [type]="'text'" formControlName="name">
+      <input (ngModelChange)="changeHandler($event)"
+             [className]="createItem.get('name').status === 'VALID' ? 'valid' : 'invalid'" [placeholder]="'name'"
+             [type]="'text'" formControlName="name"
+             required>
     </label>
     <label>
       part number
-      <input [placeholder]="'manufacturer part number'" [type]="'text'" formControlName="manPartNumber">
+      <input [className]="createItem.get('manPartNumber').status === 'VALID' ? 'valid' : 'invalid'"
+             [placeholder]="'manufacturer part number'" [type]="'text'" formControlName="manPartNumber" required>
     </label>
     <label>
       minimum stock
-      <input [placeholder]="'0'" [type]="'number'" formControlName="minStock" min="0">
+      <input [className]="createItem.get('minStock').status === 'VALID' ? 'valid' : 'invalid'" [placeholder]="'0'"
+             [type]="'number'" formControlName="minStock" min="0" required>
     </label>
     <label>
       current quantity
-      <input [placeholder]="'0'" [type]="'number'" formControlName="currentQuantity">
+      <input [className]="createItem.get('currentQuantity').status === 'VALID' ? 'valid' : 'invalid'"
+             [placeholder]="'0'" [type]="'number'" formControlName="currentQuantity" required>
     </label>
     <label>
       location
-      <input [placeholder]="'stock location'" [type]="'text'" formControlName="location">
+      <input [className]="createItem.get('location').status === 'VALID' ? 'valid' : 'invalid'"
+             [placeholder]="'stock location'" [type]="'text'" formControlName="location" required>
     </label>
       <label>
       cost
-      <input [placeholder]="'$0.00'" [type]="'number'" formControlName="cost" min="0">
-    </label>
-    <label id="description">
-      description
-      <textarea [placeholder]="'description'" formControlName="description"></textarea>
+      <input [className]="createItem.get('cost').status === 'VALID' ? 'valid' : 'invalid'" [placeholder]="'$0.00'"
+             [type]="'number'" formControlName="cost" min="0" required>
     </label>
     <label id="fileUpload">
       drawing file upload
     <input (change)="handleFileInput($event)"
+           [className]="createItem.get('imageFile').status === 'VALID' ? 'valid' : 'invalid'"
            accept="application/pdf"
            formControlName="imageFile"
            type="file">
     </label>
+    <label id="description">
+      description
+      <textarea [className]="createItem.get('description').status === 'VALID' ? 'valid' : 'invalid'"
+                [placeholder]="'description'" formControlName="description"></textarea>
+    </label>
 
       </span>
     <span>
-      <button [type]="'submit'">Done</button>
+      <button>Done</button>
     </span>
   </form>
 </section>
 
-<!--<div *ngFor="let name of names"><h1>{{name.val}}</h1> </div>-->

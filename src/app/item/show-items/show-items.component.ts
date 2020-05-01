@@ -22,4 +22,7 @@ export class ShowItemsComponent implements OnInit {
     });
   }
 
+  showItemPage(id: any) {
+    console.log(id);
+  }
 }

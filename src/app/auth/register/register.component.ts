@@ -11,18 +11,19 @@ import {Router} from '@angular/router';
 export class RegisterComponent implements OnInit {
 
   error = {code: '', message: ''};
-  registerForm = new FormGroup({
-    email: new FormControl('', Validators.email),
-    uniqueGroupID: new FormControl(''),
-    confirmPassword: new FormControl(''),
-    password: new FormControl(''),
-  });
+  registerForm: FormGroup;
   groupStyle: string;
 
   constructor(private authService: AuthService, private router: Router) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.registerForm = new FormGroup({
+      email: new FormControl('', Validators.email),
+      uniqueGroupID: new FormControl('', Validators.minLength(1)),
+      confirmPassword: new FormControl('', Validators.minLength(6)),
+      password: new FormControl('', Validators.minLength(6)),
+    });
     if (this.authService.isAuthenticated()) {
       this.router.navigate(['']).then(r => console.log(r));
     }
@@ -30,7 +31,7 @@ export class RegisterComponent implements OnInit {
 
   register() {
     if (this.registerForm.value.password === this.registerForm.value.confirmPassword
-      && this.registerForm.value.uniqueGroupID) {
+      && this.registerForm.status === 'VALID') {
       this.authService.registerUser(this.registerForm.value.email, this.registerForm.value.password, this.registerForm.value.uniqueGroupID)
         .catch(error => {
           this.error.message = error;

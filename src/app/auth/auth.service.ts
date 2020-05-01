@@ -13,8 +13,6 @@ export class AuthService {
   private signedIn = false;
   private user = null;
 
-  // private admin = firebase.auth();
-
   constructor(private router: Router, private dbControllerService: DbControllerService) {
   }
 
@@ -35,7 +33,7 @@ export class AuthService {
         if (result) {
           this.user = result.user;
           console.log(result.user.toJSON());
-          this.router.navigate(['']).catch(error => console.log(error));
+          this.router.navigate(['home']).catch(error => console.log(error));
         }
       });
   }
@@ -76,7 +74,7 @@ export class AuthService {
                     firebase.auth().currentUser.delete().catch(err => console.log(err));
                     reject('Group Id already exists');
                   } else {
-                    this.router.navigate([''])
+                    this.router.navigate(['home'])
                       .catch(error => console.log(error));
                     resolve('success');
                   }

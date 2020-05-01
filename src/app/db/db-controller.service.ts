@@ -79,7 +79,7 @@ export class DbControllerService {
             currentQuantity: item.data().currentQuantity,
             description: item.data().description,
             location: item.data().location,
-            imageFile: this.getPDFUrl(item.data().imageFile),
+            imageFile: item.data().imageFile ? this.getPDFUrl(item.data().imageFile) : '',
             manPartNumber: item.data().manPartNumber
           });
         });

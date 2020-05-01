@@ -1,5 +1,4 @@
 <section>
-  <span id="error-message">{{error.message}}</span>
 
   <form (ngSubmit)="add(createItem)" [formGroup]="createItem" enctype="multipart/form-data">
     <h1>{{item}}</h1>
@@ -37,8 +36,9 @@
              [type]="'number'" formControlName="cost" min="0" required>
     </label>
     <label id="fileUpload">
-      drawing file upload
+      drawing file upload (not required)
     <input (change)="handleFileInput($event)"
+           placeholder="not required"
            [className]="createItem.get('imageFile').status === 'VALID' ? 'valid' : 'invalid'"
            accept="application/pdf"
            formControlName="imageFile"
@@ -51,6 +51,8 @@
     </label>
 
       </span>
+    <span *ngIf="error.message" id="error-message">{{error.message}}</span>
+
     <span>
       <button>Done</button>
     </span>

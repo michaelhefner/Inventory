@@ -1,5 +1,4 @@
 <section>
-  <span id="error-message">{{errorMessage}}</span>
 
   <form (ngSubmit)="signIn()" [formGroup]="signInForm">
     <label>
@@ -11,6 +10,8 @@
       password
       <input [placeholder]="'password'" [type]="'password'" formControlName="password">
     </label>
+    <span *ngIf="errorMessage" id="error-message">{{errorMessage}}</span>
+
     <button [type]="'submit'" id="submit">Submit</button>
   </form>
 </section>

@@ -6,11 +6,11 @@ import {RegisterComponent} from './auth/register/register.component';
 import {AuthGuard} from './auth/auth-guard.service';
 import {CreateItemComponent} from './item/create-item/create-item.component';
 import {ShowItemsComponent} from './item/show-items/show-items.component';
+import {WelcomeComponent} from './home/welcome/welcome.component';
 
 
 const routes: Routes = [{
-  path: '',
-  canActivate: [AuthGuard],
+  path: 'home',
   component: HomeComponent
 }, {
   path: 'sign_in',
@@ -26,7 +26,12 @@ const routes: Routes = [{
   path: 'create_item',
   canActivate: [AuthGuard],
   component: CreateItemComponent
-}];
+}, {
+  path: 'welcome',
+  canActivate: [AuthGuard],
+  component: WelcomeComponent
+}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

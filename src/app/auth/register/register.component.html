@@ -1,26 +1,31 @@
 <section>
-  <span id="error-message">{{error.message}}</span>
 
   <form (ngSubmit)="register()" [formGroup]="registerForm">
     <label>
       company email
-      <input [placeholder]="'email@yourcompany.com'" [type]="'email'" formControlName="email">
+      <input [className]="registerForm.get('email').status === 'VALID' ? 'valid' : 'invalid'"
+             [placeholder]="'email@yourcompany.com'" [type]="'email'" formControlName="email">
       <span
         *ngIf="!registerForm.get('email').valid && registerForm.get('email').touched">Please enter valid email</span>
     </label>
     <label>
       unique group id
-      <input [placeholder]="'Company Inc Inventory'" [style.background-color]="groupStyle" [type]="'text'"
+      <input [className]="registerForm.get('uniqueGroupID').status === 'VALID' ? 'valid' : 'invalid'"
+             [placeholder]="'Company Inc Inventory'" [style.background-color]="groupStyle" [type]="'text'"
              formControlName="uniqueGroupID">
     </label>
     <label>
       password
-      <input [placeholder]="'password'" [type]="'password'" formControlName="password">
+      <input [className]="registerForm.get('password').status === 'VALID' ? 'valid' : 'invalid'"
+             [placeholder]="'password'" [type]="'password'" formControlName="password">
     </label>
     <label>
       confirm password
-      <input [placeholder]="'confirm password'" [type]="'password'" formControlName="confirmPassword">
+      <input [className]="registerForm.get('confirmPassword').status === 'VALID' ? 'valid' : 'invalid'"
+             [placeholder]="'confirm password'" [type]="'password'" formControlName="confirmPassword">
     </label>
+    <span *ngIf="error.message" id="error-message">{{error.message}}</span>
+
     <button [type]="'submit'" id="submit">Submit</button>
   </form>
 </section>

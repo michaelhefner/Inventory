@@ -1,20 +1,53 @@
 section
+  max-width: 100vw
+
+article
+  margin: 0
+  padding: 5%
   display: flex
-  flex-direction: column
-  justify-self: center
-  align-content: center
-  background: rgba(30, 30, 30, .1)
-  border-radius: .2rem
-  box-shadow: 0 0 3px rgba(10, 10, 10, .7)
-  margin: 5% 20%
+  justify-content: space-around
+  align-content: space-around
 
-header
-  width: 96%
-  background: rgba(10, 10, 10, .1)
-  padding: 2%
-
-main
-  padding: 5% 0
+article:nth-child(even)
+  background: rebeccapurple
+  color: white
 
 p
-  padding: 2.5%
+  margin: 2.5%
+  font-size: 1.5rem
+
+img.full-width
+  width: 100%
+  height: 100%
+  box-shadow: none
+
+article:nth-child(odd)
+  padding: 15% 0
+  flex-direction: column
+
+img
+  width: 70%
+  height: 100%
+  box-shadow: 0 15px 30px rgba(55, 55, 55, .9)
+
+span, h1, h2
+  display: inline
+  text-align: center
+
+h1
+  font-size: 3rem
+
+h2
+  font-size: 2.3rem
+  color: rebeccapurple
+  font-weight: lighter
+
+@media (max-width: 70rem)
+  article
+    flex-direction: column
+  img
+    width: 100%
+
+@media (max-width: 60rem)
+
+@media (max-width: 50rem)

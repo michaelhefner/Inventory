@@ -16,7 +16,6 @@ button
 label
   width: 22.75%
   margin: .5rem
-  //width: auto
   padding: 0
 
 input
@@ -39,9 +38,29 @@ form
   width: 60%
   justify-content: center
 
-.invalid
-  border: solid 1px red
+@media (max-width: 75rem)
+  label
+    width: 30%
 
-.valid
-  border: solid 1px green
-  background: rgba(175, 245, 170, .5)
+@media (max-width: 60rem)
+  section
+    display: block
+    margin: 0
+    width: 100%
+    padding: 0
+  form
+    width: 70%
+    margin: auto
+    padding: 2% 0
+  label
+    width: 47%
+
+@media (max-width: 45rem)
+  form
+    width: 80%
+  label
+    width: 100%
+    font-size: 1.4rem
+  input
+    font-size: 1.1rem
+

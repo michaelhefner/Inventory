@@ -14,6 +14,7 @@ import {AuthGuard} from './auth/auth-guard.service';
 import {CreateItemComponent} from './item/create-item/create-item.component';
 import {ShowItemsComponent} from './item/show-items/show-items.component';
 import {HttpClientModule} from '@angular/common/http';
+import {WelcomeComponent} from './home/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {HttpClientModule} from '@angular/common/http';
     HomeComponent,
     NavbarComponent,
     CreateItemComponent,
-    ShowItemsComponent
+    ShowItemsComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,

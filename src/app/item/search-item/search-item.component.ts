@@ -9,6 +9,7 @@ import {DbControllerService} from '../../db/db-controller.service';
 })
 export class SearchItemComponent implements OnInit {
 
+  itemToShow;
   filteredItems = [];
   formGroup: FormGroup;
   private items = [];
@@ -28,8 +29,8 @@ export class SearchItemComponent implements OnInit {
     this.filteredItems = this.items;
   }
 
-  showItemPage(id: any) {
-    console.log(id);
+  showItemPage(item) {
+    this.itemToShow = item;
   }
 
   searchInputChange(e: any) {

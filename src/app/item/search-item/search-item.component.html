@@ -14,7 +14,7 @@
       <!--      <th class="drawing">Link to Drawing</th>-->
     </tr>
     </thead>
-    <tr (click)="showItemPage(item.id)" *ngFor="let item of filteredItems" [id]="item.id" class="item-row">
+    <tr (click)="showItemPage(item)" *ngFor="let item of filteredItems" [id]="item.id" class="item-row">
       <!--      <td class="inventory">{{item.id}}</td>-->
       <td class="name">{{item.name}}</td>
       <td class="description">{{item.description}}</td>
@@ -28,4 +28,5 @@
       <!--      </td>-->
     </tr>
   </table>
+  <app-show-items [item]="itemToShow"></app-show-items>
 </section>

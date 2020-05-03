@@ -5,8 +5,8 @@ import {HomeComponent} from './home/home.component';
 import {RegisterComponent} from './auth/register/register.component';
 import {AuthGuard} from './auth/auth-guard.service';
 import {CreateItemComponent} from './item/create-item/create-item.component';
-import {ShowItemsComponent} from './item/show-items/show-items.component';
 import {WelcomeComponent} from './home/welcome/welcome.component';
+import {SearchItemComponent} from './item/search-item/search-item.component';
 
 
 const routes: Routes = [{
@@ -19,9 +19,9 @@ const routes: Routes = [{
   path: 'register',
   component: RegisterComponent
 }, {
-  path: 'show_items',
+  path: 'search_item',
   canActivate: [AuthGuard],
-  component: ShowItemsComponent
+  component: SearchItemComponent
 }, {
   path: 'create_item',
   canActivate: [AuthGuard],

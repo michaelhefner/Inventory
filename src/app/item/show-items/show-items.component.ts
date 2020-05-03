@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {DbControllerService} from '../../db/db-controller.service';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-show-items',
@@ -7,22 +6,13 @@ import {DbControllerService} from '../../db/db-controller.service';
   styleUrls: ['./show-items.component.sass']
 })
 export class ShowItemsComponent implements OnInit {
+  @Input() item;
 
-  items = [];
-
-  constructor(private dbControllerService: DbControllerService) {
+  constructor() {
   }
 
   ngOnInit(): void {
-    this.dbControllerService.select('parts').then(res => {
-      res.forEach(item => {
-        this.items.push(item);
-        console.log(item);
-      });
-    });
+    console.log(this.item);
   }
 
-  showItemPage(id: any) {
-    console.log(id);
-  }
 }

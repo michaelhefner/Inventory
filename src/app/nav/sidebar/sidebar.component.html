@@ -1,0 +1,22 @@
+<!--<aside>-->
+<!--  <nav>-->
+<!--    <ul>-->
+<!--      <li>Parts Inventory</li>-->
+<!--    </ul>-->
+<!--  </nav>-->
+<!--</aside>-->
+<header>
+  <h1><a routerLink="home"> {{title}} </a></h1>
+  <ul *ngIf="isSignedIn">
+    <li><a routerLink="home"> Home </a></li>
+    <li><a routerLink="create_item"> Create Item </a></li>
+    <li><a routerLink="search_item"> Search Item </a></li>
+  </ul>
+
+  <nav>
+    <button (click)="SignIn()" *ngIf="!isSignedIn">Sign In</button>
+    <button (click)="SignOut()" *ngIf="isSignedIn" id="signout">Sign Out</button>
+    <button (click)="register()" *ngIf="!isSignedIn">Register</button>
+  </nav>
+
+</header>

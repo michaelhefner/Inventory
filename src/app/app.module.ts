@@ -16,6 +16,7 @@ import {ShowItemsComponent} from './item/show-items/show-items.component';
 import {HttpClientModule} from '@angular/common/http';
 import {WelcomeComponent} from './home/welcome/welcome.component';
 import {SearchItemComponent} from './item/search-item/search-item.component';
+import {SidebarComponent} from './nav/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {SearchItemComponent} from './item/search-item/search-item.component';
     CreateItemComponent,
     ShowItemsComponent,
     WelcomeComponent,
-    SearchItemComponent
+    SearchItemComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,

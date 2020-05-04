@@ -1,32 +1,36 @@
 <section>
-  <form [formGroup]="formGroup">
-    <label>Search</label> <input (ngModelChange)="searchInputChange($event)" formControlName="searchItems" type="text">
-  </form>
-  <table>
-    <thead>
-    <tr id="header">
-      <!--      <th class="inventory">Inventory#</th>-->
-      <th class="name">Name</th>
-      <th class="description">Description</th>
-      <th class="location">Location</th>
-      <!--      <th class="quantity">Current Quantity</th>-->
-      <th class="man-part">Manufacturer Part#</th>
-      <!--      <th class="drawing">Link to Drawing</th>-->
-    </tr>
-    </thead>
-    <tr (click)="showItemPage(item)" *ngFor="let item of filteredItems" [id]="item.id" class="item-row">
-      <!--      <td class="inventory">{{item.id}}</td>-->
-      <td class="name">{{item.name}}</td>
-      <td class="description">{{item.description}}</td>
-      <td class="location">{{item.location}}</td>
-      <!--      <td class="quantity">{{item.currentQuantity}}</td>-->
-      <td class="man-part"> {{item.manPartNumber}}</td>
-      <!--      <td class="drawing">-->
-      <!--        <a [href]="item.imageFile === '' ? '#/show_items' : item.imageFile.i">-->
-      <!--          {{item.imageFile !== '' ? 'Show Drawing File' : 'No drawing on file'}}-->
-      <!--        </a>-->
-      <!--      </td>-->
-    </tr>
-  </table>
-  <app-show-items [item]="itemToShow"></app-show-items>
+  <article>
+
+    <form [formGroup]="formGroup">
+      <label>Search: <input (ngModelChange)="searchInputChange($event)" formControlName="searchItems"
+                            type="text"></label>
+    </form>
+    <table>
+      <thead>
+      <tr id="header">
+        <!--      <th class="inventory">Inventory#</th>-->
+        <th class="name">Name</th>
+        <th class="description">Description</th>
+        <th class="location">Location</th>
+        <!--      <th class="quantity">Current Quantity</th>-->
+        <th class="man-part">Manufacturer Part#</th>
+        <!--      <th class="drawing">Link to Drawing</th>-->
+      </tr>
+      </thead>
+      <tr (click)="showItemPage(item)" *ngFor="let item of filteredItems" [id]="item.id" class="item-row">
+        <!--      <td class="inventory">{{item.id}}</td>-->
+        <td class="name">{{item.name}}</td>
+        <td class="description">{{item.description}}</td>
+        <td class="location">{{item.location}}</td>
+        <!--      <td class="quantity">{{item.currentQuantity}}</td>-->
+        <td class="man-part"> {{item.manPartNumber}}</td>
+        <!--      <td class="drawing">-->
+        <!--        <a [href]="item.imageFile === '' ? '#/show_items' : item.imageFile.i">-->
+        <!--          {{item.imageFile !== '' ? 'Show Drawing File' : 'No drawing on file'}}-->
+        <!--        </a>-->
+        <!--      </td>-->
+      </tr>
+    </table>
+    <app-show-items [item]="itemToShow"></app-show-items>
+  </article>
 </section>

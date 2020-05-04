@@ -1,3 +1,12 @@
-<section>
-  <h1 *ngIf="item">test{{item.id}}</h1>
+<section *ngIf="item">
+  <header>
+    <h1>{{item.name}}</h1>
+    <h2>Location: {{item.location}}</h2>
+  </header>
+  <article>
+    <h2>Manufacture Part Number: {{item.manPartNumber}}</h2>
+    <a [href]="item.imageFile === '' ? '#/show_items' : item.imageFile.i">
+      {{item.imageFile !== '' ? 'Show Drawing File' : 'No drawing on file'}}
+    </a>
+  </article>
 </section>

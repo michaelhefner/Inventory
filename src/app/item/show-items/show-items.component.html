@@ -1,12 +1,20 @@
-<section *ngIf="item">
-  <header>
-    <h1>{{item.name}}</h1>
-    <h2>Location: {{item.location}}</h2>
-  </header>
-  <article>
-    <h2>Manufacture Part Number: {{item.manPartNumber}}</h2>
-    <a [href]="item.imageFile === '' ? '#/show_items' : item.imageFile.i">
-      {{item.imageFile !== '' ? 'Show Drawing File' : 'No drawing on file'}}
-    </a>
+<section>
+  <article *ngFor="let item of filteredItems" [id]="item.id" class="item-row">
+    <header>
+      <h1 class="name">{{item.name}}</h1>
+      <p class="location">Location: <strong>{{item.location}}</strong></p>
+    </header>
+    <aside>
+      <p class="description"><strong>Description:</strong> {{item.description}}</p>
+    </aside>
+    <footer>
+      <p class="man-part">Manufacturer Part Number: <strong>{{item.manPartNumber}}</strong></p>
+      <p class="drawing">
+        <a [href]="item.imageFile === '' ? '#/show_items' : item.imageFile.i">
+          Drawing:
+          <strong>{{item.imageFile !== '' ? 'Show Drawing File' : 'No drawing on file'}}</strong>
+        </a>
+      </p>
+    </footer>
   </article>
 </section>

@@ -1,22 +1,24 @@
-<!--<aside>-->
-<!--  <nav>-->
-<!--    <ul>-->
-<!--      <li>Parts Inventory</li>-->
-<!--    </ul>-->
-<!--  </nav>-->
-<!--</aside>-->
 <header>
-  <h1><a routerLink="home"> {{title}} </a></h1>
-  <ul *ngIf="isSignedIn">
-    <li><a routerLink="home"> Home </a></li>
-    <li><a routerLink="create_item"> Create Item </a></li>
-    <li><a routerLink="search_item"> Search Item </a></li>
-  </ul>
+  <svg (click)="toggleFullNav()" height="40" viewBox="0 0 100 80" width="40">
+    <rect fill="#fff" height="5" width="100"></rect>
+    <rect fill="#fff" height="5" width="100" y="30"></rect>
+    <rect fill="#fff" height="5" width="100" y="60"></rect>
+  </svg>
+  <h1 [className]="headerClass"><a (click)="toggleFullNav()" routerLink="home"> {{title}} </a></h1>
 
-  <nav>
-    <button (click)="SignIn()" *ngIf="!isSignedIn">Sign In</button>
-    <button (click)="SignOut()" *ngIf="isSignedIn" id="signout">Sign Out</button>
-    <button (click)="register()" *ngIf="!isSignedIn">Register</button>
+  <nav [className]="navClass">
+
+    <ul *ngIf="isSignedIn">
+      <li><a (click)="toggleFullNav()" routerLink="home"> Home </a></li>
+      <li><a (click)="toggleFullNav()" routerLink="create_item"> Create Item </a></li>
+      <li><a (click)="toggleFullNav()" routerLink="search_item"> Search Item </a></li>
+    </ul>
   </nav>
+
+  <div [className]="headerClass">
+    <button (click)="SignIn()" *ngIf="!isSignedIn">Sign In</button>
+    <button (click)="register()" *ngIf="!isSignedIn">Register</button>
+  </div>
+  <button (click)="SignOut()" *ngIf="isSignedIn" id="signout">Sign Out</button>
 
 </header>

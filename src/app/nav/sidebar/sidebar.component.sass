@@ -1,46 +1,152 @@
 header
+  width: 100%
   background: rgba(75, 75, 75, 1)
-  padding: 0
-  margin: 0
-  width: 15vw
-  height: 100vh
   position: fixed
   display: flex
-  flex-direction: column
-  align-items: center
-  box-shadow: 3px 0 5px rgba(0, 0, 0, .5)
-//border-left: solid 1px rebeccapurple
-h1
-  margin: 2.5%
-  font-weight: lighter
-  text-shadow: 0 0 1px rebeccapurple
-
-ul
-  margin: auto 0
-  width: 100%
-  display: block
-
-li
-  margin: 5%
-  list-style: none
-
-li a
-  width: 100%
-  display: block
-  padding: 2% 5%
-  background: rgba(55, 55, 55, 1)
-  box-shadow: 0 3px 3px rgba(0, 0, 0, .7)
-  text-align: center
-
-li a:hover
-  background: rebeccapurple
+  flex-direction: row
+  padding: 0
+  margin: 0
 
 nav
   width: 100%
+  display: flex
+  flex-direction: row
+  align-items: flex-end
+  justify-content: space-around
 
-nav button
+ul
+  display: flex
+  flex-direction: row
+  justify-content: space-around
+  align-self: center
   width: 100%
-  margin: 5%
+  margin: 0
+
+li
+  list-style: none
+
+h1
+  font-weight: lighter
+  text-shadow: 0 0 1px rebeccapurple
+  text-align: center
+  padding: 1rem
+
+li a
+  padding: 1.5rem
+  //margin-top: 1rem
+  height: 100%
+  //background: rgba(55, 55, 55, 1)
+  //box-shadow: 0 3px 3px rgba(0, 0, 0, .7)
+  text-align: center
+  transition: all 100ms ease-in-out
+
+li a:hover
+  background: rebeccapurple
+//padding: .25rem 2.25rem
+
+svg
+  margin: .25rem
+  cursor: pointer
+  padding: .5rem
+
+svg:hover
+  background: rgba(255, 255, 255, .1)
+
+div
+  padding: 0
+  margin: 0
+  display: flex
+  flex-direction: row
+  margin-left: auto
+  align-self: center
+  width: 30%
 
 #signout
   background: rgba(255, 50, 50, 1)
+  margin: 0 2.5% 0 auto
+  display: block
+  min-width: 10%
+
+#signout:hover
+  background: white
+  font-weight: bold
+  cursor: pointer
+  color: black
+
+.hidden
+  display: none
+
+.visible
+  display: flex
+
+
+@media (max-width: 50rem)
+  header
+    flex-direction: column
+  nav
+    width: 100%
+    flex-direction: column
+  ul,
+  li,
+  li a
+    display: block
+    padding: .5rem 0
+    width: 100%
+
+  #signout
+    margin-left: auto
+
+
+@media (min-width: 70rem)
+  header
+    display: flex
+    align-items: center
+    width: auto
+    height: 100vh
+    flex-direction: column
+    box-shadow: 3px 0 5px rgba(0, 0, 0, .5)
+    margin: 0
+    padding: 0
+  ul
+    width: 100%
+    display: block
+    margin: auto
+    padding: 0
+    flex-direction: column
+    align-items: center
+
+  li, li a
+    display: block
+    width: 100%
+    margin: 3% 0
+    padding: 2.5% 2%
+
+  li a:hover
+    padding: 3% 4%
+
+  nav
+    height: 85%
+    width: 100%
+    flex-direction: column
+
+  div
+    margin: 0
+    margin-top: auto
+    padding: 0
+    display: block
+    width: 100%
+  div button
+    width: 90%
+    margin: 5%
+
+  #signout
+    margin: auto 0 5% 0
+
+  .min
+    display: none
+
+
+@media (min-width: 50rem)
+  #signout
+    align-self: center
+

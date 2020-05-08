@@ -1,15 +1,66 @@
 section
-  display: flex
-  flex-direction: column
-  justify-content: center
-  align-items: center
-  width: 50%
-  height: 100%
+  width: 100vw
+  margin: 0
+  padding: 0
 
-header
+article
+  width: 80%
+  box-shadow: 0 3px 5px rgba(0, 0, 0, .7)
+  margin: 1% 10%
+  background: rgba(75, 75, 75, 1)
+  color: white
+
+article:hover
+  background: rgba(255, 255, 255, .2)
+  color: black
+
+article aside
+  display: flex
+  flex-direction: row
+
+article aside h3, article aside p, article aside
+  margin: 1%
+
+footer, header
   display: flex
   flex-direction: row
   justify-content: space-between
+  background: rgba(0, 0, 0, .4)
+  padding: .5%
 
-h1, h2
-  display: inline
+header
+  border-bottom: solid 2px rebeccapurple
+
+.description
+  max-width: 50%
+
+p a:hover
+  color: yellow
+//@media (max-width: 80rem)
+//  .man-part
+//    display: none
+//
+//@media (max-width: 70rem)
+//  .description, .man-part
+//    display: none
+//
+//@media (max-width: 60rem)
+//  .description, .man-part, .drawing
+//    display: none
+//
+@media (max-width: 60rem)
+  article
+    width: 90%
+    margin: 4% auto
+    padding: 0
+  section article aside
+    display: none
+  .description
+    max-width: 100%
+    width: 98%
+    padding: 1%
+  //display: none
+  .drawing
+  //display: none
+  header, footer
+    padding: 3%

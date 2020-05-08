@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
       password: new FormControl('', Validators.minLength(6)),
     });
     if (this.authService.isAuthenticated()) {
-      this.router.navigate(['']).then(r => console.log(r));
+      this.router.navigate(['home']).then(r => console.log(r));
     }
   }
 

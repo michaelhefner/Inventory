@@ -6,13 +6,12 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./show-items.component.sass']
 })
 export class ShowItemsComponent implements OnInit {
-  @Input() item;
+  @Input() filteredItems;
 
   constructor() {
   }
 
   ngOnInit(): void {
-    console.log(this.item);
   }
 
 }

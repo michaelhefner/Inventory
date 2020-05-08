@@ -1,9 +1,11 @@
-import {EventEmitter, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import {Router} from '@angular/router';
 import {DbControllerService} from '../db/db-controller.service';
+import {Observable, Subject} from 'rxjs';
+import {ConfigFile} from '../../configFile';
 
 @Injectable({
   providedIn: 'root'
@@ -13,17 +15,18 @@ export class AuthService {
   private signedIn = false;
   private user = null;
 
+  private userSubject = new Subject();
+
   constructor(private router: Router, private dbControllerService: DbControllerService) {
+    firebase.initializeApp(ConfigFile.firebaseConfig);
+    this.authStateListener();
   }
 
   authStateListener() {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.signedIn = true;
-        this.user = user;
-      } else {
-        this.signedIn = false;
-      }
+    return firebase.auth().onAuthStateChanged(user => {
+      this.userSubject.next(!!user);
+      this.signedIn = !!user;
+      this.user = user || null;
     });
   }
 
@@ -38,15 +41,13 @@ export class AuthService {
       });
   }
 
-  listener(): EventEmitter<boolean> {
-    const emitter = new EventEmitter<boolean>();
-    firebase.auth().onAuthStateChanged(
-      user => user ? emitter.emit(true) : emitter.emit(false));
-    return emitter;
+  listener(): Observable<any> {
+    return this.userSubject.asObservable();
   }
 
   isAuthenticated() {
     return this.signedIn;
+    // return this.userSubject.asObservable();
   }
 
   signOut() {

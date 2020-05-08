@@ -11,6 +11,9 @@ export class SidebarComponent implements OnInit {
 
   isSignedIn: boolean;
   title = 'Inventory';
+  fullNavVisible = false;
+  navClass = 'hidden';
+  headerClass = 'min';
 
   constructor(private authService: AuthService, private router: Router) {
   }
@@ -32,4 +35,9 @@ export class SidebarComponent implements OnInit {
     this.router.navigate(['register']).catch(error => console.log(error));
   }
 
+  toggleFullNav() {
+    this.fullNavVisible = !this.fullNavVisible;
+    this.navClass = this.fullNavVisible ? 'visible' : 'hidden';
+    this.headerClass = this.fullNavVisible ? '' : 'min';
+  }
 }

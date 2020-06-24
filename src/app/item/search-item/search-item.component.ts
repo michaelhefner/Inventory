@@ -41,6 +41,7 @@ export class SearchItemComponent implements OnInit {
         list.push(res);
       }
     });
+    console.log(this.filteredItems.length);
     this.filteredItems = list;
   }
 }

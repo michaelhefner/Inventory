@@ -17,6 +17,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {WelcomeComponent} from './home/welcome/welcome.component';
 import {SearchItemComponent} from './item/search-item/search-item.component';
 import {SidebarComponent} from './nav/sidebar/sidebar.component';
+import {FooterComponent} from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {SidebarComponent} from './nav/sidebar/sidebar.component';
     ShowItemsComponent,
     WelcomeComponent,
     SearchItemComponent,
-    SidebarComponent
+    SidebarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

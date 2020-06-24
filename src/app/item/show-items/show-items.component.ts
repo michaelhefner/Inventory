@@ -12,6 +12,7 @@ export class ShowItemsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.filteredItems);
   }
 
 }

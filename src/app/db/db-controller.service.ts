@@ -54,6 +54,7 @@ export class DbControllerService {
   uploadFile(fileToUpload: File, location: string) {
     return this.getGroupID()
       .then(res => {
+        console.log(res);
         return firebase.app().storage('gs://michaelhefner-inventory.appspot.com/')
           .ref().child(`${res}/${location}/${fileToUpload.name}`)
           .put(fileToUpload)
@@ -72,6 +73,7 @@ export class DbControllerService {
       .get().then(doc => {
         const returnObj = [];
         doc.forEach(item => {
+          console.log(item.data());
           returnObj.push({
             id: item.id,
             name: item.data().name,
@@ -79,10 +81,11 @@ export class DbControllerService {
             currentQuantity: item.data().currentQuantity,
             description: item.data().description,
             location: item.data().location,
-            imageFile: item.data().imageFile ? this.getPDFUrl(item.data().imageFile) : '',
+            imageFile: item.data().imageFile ? this.getPDFUrl(`${item.data().imageFile}`) : '',
             manPartNumber: item.data().manPartNumber
           });
         });
+        console.log(returnObj);
         return returnObj;
       });
   }

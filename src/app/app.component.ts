@@ -15,8 +15,11 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.router.navigate(['home']);
-    this.authService.listener().subscribe(res => console.log(res));
+    this.authService.listener().subscribe(res => {
+      if (!res) {
+        this.router.navigate(['home']);
+      }
+    });
 
   }
 

@@ -18,7 +18,7 @@
   <div [className]="headerClass">
     <button (click)="SignIn()" *ngIf="!isSignedIn">Sign In</button>
     <button (click)="register()" *ngIf="!isSignedIn">Register</button>
+    <button (click)="SignOut()" *ngIf="isSignedIn" id="signout">Sign Out</button>
   </div>
-  <button (click)="SignOut()" *ngIf="isSignedIn" id="signout">Sign Out</button>
 
 </header>

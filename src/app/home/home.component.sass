@@ -1,11 +1,11 @@
 section
-  width: 100vw
+  width: 100%
   padding: 10% 0
   max-width: 100%
 
 
 article
-  padding: 20% 5%
+  padding: 10% 5%
   display: flex
   flex-direction: row
   height: 100%
@@ -20,22 +20,29 @@ article:nth-child(even)
 
 p
   margin: 2.5%
-  font-size: 1.5rem
+  font-size: 2rem
+  width: 33%
 
 img.full-width
   box-shadow: none
 
-article:nth-child(odd)
-  flex-direction: column
+//article:nth-child(odd)
+//  flex-direction: column
+
+picture
+  width: 100%
 
 img
-  max-width: 40%
-  margin: 5%
+  //max-width: 40%
+  //margin: 5%
   box-shadow: 0 15px 30px rgba(55, 55, 55, .9)
+  width: 100%
 
 span, h1, h2
   display: inline
   text-align: center
+  width: 100%
+  padding: 5rem 0
 
 h1
   font-size: 3rem
@@ -67,3 +74,19 @@ h2
     margin: 5%
 
 @media (max-width: 50rem)
+  img
+    display: none
+  p
+    width: 100%
+    font-size: 1.5rem
+    padding: 0
+    margin: 0
+  span
+    padding: 0
+    margin: 0
+    max-width: 100%
+  span h1
+    font-size: 1.5rem
+  span h2
+    font-size: 1.25rem
+//text-align: center
